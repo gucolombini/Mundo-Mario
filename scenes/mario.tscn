@@ -1,0 +1,119 @@
+[gd_scene load_steps=13 format=3 uid="uid://d3swkc3c5j3cq"]
+
+[ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scenes/mario.gd" id="1_q20sn"]
+[ext_resource type="Texture2D" uid="uid://drrm2eirpoq3x" path="res://assets/animated/marioanims/marioanims0001.png" id="1_t0xp7"]
+[ext_resource type="Texture2D" uid="uid://dsa13f6ahg5d6" path="res://assets/animated/marioanims/marioanims0002.png" id="2_q20sn"]
+[ext_resource type="Texture2D" uid="uid://di7aon4g2plba" path="res://assets/animated/marioanims/marioanims0003.png" id="3_l5geh"]
+[ext_resource type="Texture2D" uid="uid://dpjec456gmaw7" path="res://assets/animated/marioanims/marioanims0004.png" id="4_bdh24"]
+[ext_resource type="Texture2D" uid="uid://ixcdn5akc33i" path="res://assets/animated/marioanims/marioanims0005.png" id="5_pruu4"]
+[ext_resource type="Texture2D" uid="uid://ckjarxw320lc8" path="res://assets/animated/marioanims/marioanims0007.png" id="6_440ab"]
+[ext_resource type="Texture2D" uid="uid://dlumfov675j6p" path="res://assets/animated/marioanims/marioanims0008.png" id="7_l0oii"]
+[ext_resource type="Texture2D" uid="uid://v5du6w8hwnrj" path="res://assets/animated/marioanims/marioanims0009.png" id="8_lt8tb"]
+[ext_resource type="Texture2D" uid="uid://xhwrqjrvoaji" path="res://assets/animated/marioanims/marioanims0010.png" id="9_7hmub"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l5geh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t0xp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q20sn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l5geh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bdh24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pruu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_440ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l0oii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lt8tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7hmub")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_lt8tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7hmub")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_l5geh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("3_l5geh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_440ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l0oii")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t0xp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q20sn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l5geh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bdh24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pruu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l5geh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
+size = Vector2(76, 164)
+
+[node name="Node2D" type="CharacterBody2D"]
+script = ExtResource("1_q20sn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -102)
+sprite_frames = SubResource("SpriteFrames_l5geh")
+animation = &"jump"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -85)
+shape = SubResource("RectangleShape2D_bdh24")

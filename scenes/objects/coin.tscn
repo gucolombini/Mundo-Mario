@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://b413t8bjwwnj3"]
+
+[ext_resource type="Texture2D" uid="uid://sw7l32lf5qfw" path="res://assets/animated/coin.png" id="1_npg62"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxg5f"]
+atlas = ExtResource("1_npg62")
+region = Rect2(0, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5towm"]
+atlas = ExtResource("1_npg62")
+region = Rect2(72, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6le6"]
+atlas = ExtResource("1_npg62")
+region = Rect2(144, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28h24"]
+atlas = ExtResource("1_npg62")
+region = Rect2(216, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcuwf"]
+atlas = ExtResource("1_npg62")
+region = Rect2(288, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86amp"]
+atlas = ExtResource("1_npg62")
+region = Rect2(360, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwtuy"]
+atlas = ExtResource("1_npg62")
+region = Rect2(432, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or5sm"]
+atlas = ExtResource("1_npg62")
+region = Rect2(504, 0, 72, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4csug"]
+atlas = ExtResource("1_npg62")
+region = Rect2(576, 0, 72, 81)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0obue"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxg5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5towm")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_v6le6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28h24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcuwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86amp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwtuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or5sm")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_4csug")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 24.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npg62"]
+size = Vector2(52, 62)
+
+[node name="coin" type="Area2D"]
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0obue")
+animation = &"spin"
+autoplay = "spin"
+frame_progress = 0.899426
+offset = Vector2(0, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_npg62")
