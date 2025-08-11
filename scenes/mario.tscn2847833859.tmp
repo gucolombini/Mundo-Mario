@@ -47,10 +47,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_7hmub")
+"texture": ExtResource("8_lt8tb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_lt8tb")
+"texture": ExtResource("9_7hmub")
 }],
 "loop": true,
 "name": &"fall",
@@ -105,13 +105,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
 size = Vector2(76, 164)
 
-[node name="Mario" type="CharacterBody2D"]
+[node name="Node2D" type="CharacterBody2D"]
 script = ExtResource("1_q20sn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -102)
 sprite_frames = SubResource("SpriteFrames_l5geh")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

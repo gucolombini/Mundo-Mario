@@ -1,69 +1,59 @@
 extends CharacterBody2D
 
-@export var speed = 500.0
-@export var run_speed = 800.0
-@export var jump_velocity = -500.0
-@export var jump_start_velocity = -1100
-@export var jump_height = 300
-@export var jump_height_run_boost = 50
-@export var gravity = 5000.0
-@export var terminal_velocity = 2000
-var _holding_jump = false
-var _is_jumping = false
-var _jump_potential = 0
+const BASE_SPEED = 550.0
+const BASE_SPEED_RUN = 1000.0
+const BASE_SPEED_P = 1100.0
+const BASE_ACCELERATION = 30
+const BASE_DECCELERATION = 50
+const BASE_JUMP_SPEED = -1700.0
+const BASE_JUMP_SPEED_INC = -0.45
+const BASE_GRAVITY = 7000
+const BASE_GRAVITY_JUMP_HELD = BASE_GRAVITY/2
+const BASE_MAX_FALL_SPEED = 3000
+#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func jump():
-	_is_jumping = true
-	_jump_potential = jump_height
-	if velocity.x > speed or velocity.x < -speed:
-		_jump_potential += jump_height_run_boost
-	velocity.y = jump_start_velocity
-	$AnimatedSprite2D.play("jump")
-	
-func jumping(delta):
-	_jump_potential = _jump_potential + velocity.y*delta
-	velocity.y = move_toward(velocity.y, jump_velocity, 5)
-	
-func move(dir, delta, is_running: bool = false, is_midair: bool = false):
-	var target_speed = speed
-	var speed_increment = 60
-	if is_running: target_speed = run_speed
-	if not is_midair: 
-		speed_increment = 80
-		if dir > 0: $AnimatedSprite2D.flip_h = true
-		if dir < 0: $AnimatedSprite2D.flip_h = false
-	if velocity.x * dir < 0: speed_increment + 20
-	
-	velocity.x = move_toward(velocity.x, dir*target_speed, speed_increment)
+var animstate = "idle"
 
-func _physics_process(delta):
-	var dir := Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	var is_running = Input.is_action_pressed("ui_down")
+func _physics_process(delta: float) -> void:
+	var animation_timer = 1
 	
-	$AnimatedSprite2D.speed_scale = 1
-	
+	var dir := int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+	if dir != 0:
+		var accel = BASE_ACCELERATION
+		var speed = BASE_SPEED
+		if Input.is_action_pressed("ui_down"): speed = BASE_SPEED_RUN
+		if velocity.x*dir < 0: accel = BASE_DECCELERATION
+		velocity.x = move_toward(velocity.x, speed*dir, accel)
+		if is_on_floor(): $AnimatedSprite2D.flip_h = dir == 1
+	elif is_on_floor():
+		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION)
+		
 	if is_on_floor():
-		if dir != 0:
-			move(dir, delta, is_running)
-			$AnimatedSprite2D.play("walk")
-		else:
-			velocity.x = move_toward(velocity.x, 0, 100)
-			$AnimatedSprite2D.play("idle")
-			
-		#jump logic
-		if Input.is_action_just_pressed("ui_accept"):
-			jump()
-	else:
-		move(dir, delta, is_running, true)
-		if not _is_jumping:
-			velocity.y += gravity * delta
-			velocity.y = min(velocity.y, terminal_velocity)
-		elif Input.is_action_pressed("ui_accept") and _jump_potential > 0:
-			jumping(delta)
-		else:
-			_jump_potential = 0
-			_is_jumping = false
-		if velocity.y > 0:
-			$AnimatedSprite2D.speed_scale = 0.3 + (velocity.y / terminal_velocity)*0.7
-			$AnimatedSprite2D.play("fall")
+		if velocity.x != 0:
+			animstate = "walk"
+			animation_timer = 0.5 + (abs(velocity.x)/BASE_SPEED)/2
+		else: 
+			animstate = "idle"
+	
+	
+	var jump_speed = BASE_JUMP_SPEED
+	if abs(velocity.x) > BASE_SPEED:
+		jump_speed += BASE_JUMP_SPEED_INC * (abs(velocity.x) - BASE_SPEED)
+	var gravity = BASE_GRAVITY
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = jump_speed
+		animstate = "jump"
+	if Input.is_action_pressed("ui_accept"):
+		gravity = BASE_GRAVITY_JUMP_HELD
+	if velocity.y > 0 and not is_on_floor():
+		animstate = "fall"
+		animation_timer = velocity.y*2/BASE_MAX_FALL_SPEED
+	
+	
+	velocity.y = min(velocity.y + gravity * delta, BASE_MAX_FALL_SPEED)
+	
+	
+	if $AnimatedSprite2D.animation != animstate:
+		$AnimatedSprite2D.play(animstate)
+	$AnimatedSprite2D.speed_scale = animation_timer
 	move_and_slide()
