@@ -140,9 +140,10 @@ offset_right = 195.0
 offset_bottom = -235.0
 show_percentage = false
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D Head" type="Area2D" parent="."]
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D Head"]
 position = Vector2(0, -167)
 shape = SubResource("RectangleShape2D_q20sn")
 debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
