@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 var original_pos = position.y
-@export var bounce_velocity = -1000
+@export var bounce_velocity = -900
 @export var gravity = 5000
 
 var bouncing = false
@@ -9,7 +9,8 @@ var bouncing = false
 var y_speed = 0.0
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	bounce()
+	if not bouncing:
+		bounce()
 	
 func bounce():
 	print("HIIII")

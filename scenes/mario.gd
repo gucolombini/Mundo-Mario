@@ -4,7 +4,7 @@ const BASE_SPEED = 550.0
 const BASE_SPEED_RUN = 1000.0
 const BASE_SPEED_P = 1200.0
 const BASE_ACCELERATION = 30
-const BASE_DECCELERATION = 50
+const BASE_DECCELERATION = 40
 const BASE_JUMP_SPEED = -1700.0
 const BASE_JUMP_SPEED_INC = -0.5
 const BASE_GRAVITY = 7000
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			if abs(velocity.x) > BASE_SPEED: skidding = true
 		else: skidding = false
 		velocity.x = move_toward(velocity.x, speed*dir, accel)
-		if is_on_floor(): $AnimatedSprite2D.flip_h = dir == 1
+		if is_on_floor(): $AnimatedSprite2D.scale.x = -dir
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION)
 		
