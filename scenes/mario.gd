@@ -2,27 +2,43 @@ extends CharacterBody2D
 
 const BASE_SPEED = 550.0
 const BASE_SPEED_RUN = 1000.0
-const BASE_SPEED_P = 1100.0
+const BASE_SPEED_P = 1200.0
 const BASE_ACCELERATION = 30
 const BASE_DECCELERATION = 50
 const BASE_JUMP_SPEED = -1700.0
-const BASE_JUMP_SPEED_INC = -0.45
+const BASE_JUMP_SPEED_INC = -0.5
 const BASE_GRAVITY = 7000
 const BASE_GRAVITY_JUMP_HELD = BASE_GRAVITY/2
-const BASE_MAX_FALL_SPEED = 3000
+const BASE_MAX_FALL_SPEED = 2700
+const BASE_P_METER_CHARGE_TIME  = 60
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+@onready var speed_bar = $ProgressBar
 var animstate = "idle"
+var p_meter = 0
+var skidding = false
+
+func _ready() -> void:
+	speed_bar.value = 0
+	speed_bar.max_value = BASE_P_METER_CHARGE_TIME 
 
 func _physics_process(delta: float) -> void:
 	var animation_timer = 1
 	
+	speed_bar.value = p_meter
+		
 	var dir := int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	if dir != 0:
 		var accel = BASE_ACCELERATION
 		var speed = BASE_SPEED
-		if Input.is_action_pressed("ui_down"): speed = BASE_SPEED_RUN
-		if velocity.x*dir < 0: accel = BASE_DECCELERATION
+		if Input.is_action_pressed("run"): 
+			if p_meter >= BASE_P_METER_CHARGE_TIME : 
+				speed = BASE_SPEED_P
+			else: 
+				speed = BASE_SPEED_RUN
+		if velocity.x*dir < 0: 
+			accel = BASE_DECCELERATION
+			if abs(velocity.x) > BASE_SPEED: skidding = true
+		else: skidding = false
 		velocity.x = move_toward(velocity.x, speed*dir, accel)
 		if is_on_floor(): $AnimatedSprite2D.flip_h = dir == 1
 	elif is_on_floor():
@@ -30,11 +46,19 @@ func _physics_process(delta: float) -> void:
 		
 	if is_on_floor():
 		if velocity.x != 0:
-			animstate = "walk"
-			animation_timer = 0.5 + (abs(velocity.x)/BASE_SPEED)/2
+			if skidding:
+				animstate = "skid"
+			else: 
+				animstate = "walk"
+				animation_timer = 0.5 + (abs(velocity.x)/BASE_SPEED)/2
 		else: 
 			animstate = "idle"
-	
+		
+		if abs(velocity.x) >= BASE_SPEED_RUN:
+			p_meter = move_toward(p_meter, BASE_P_METER_CHARGE_TIME , 1)
+			if p_meter >= BASE_P_METER_CHARGE_TIME: p_meter = BASE_P_METER_CHARGE_TIME+10
+		else:
+			p_meter = move_toward(p_meter, 0, 1)
 	
 	var jump_speed = BASE_JUMP_SPEED
 	if abs(velocity.x) > BASE_SPEED:
@@ -48,7 +72,6 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > 0 and not is_on_floor():
 		animstate = "fall"
 		animation_timer = velocity.y*2/BASE_MAX_FALL_SPEED
-	
 	
 	velocity.y = min(velocity.y + gravity * delta, BASE_MAX_FALL_SPEED)
 	

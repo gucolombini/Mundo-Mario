@@ -1,81 +1,82 @@
-[gd_scene load_steps=23 format=3 uid="uid://cj1wtfesnm2ho"]
+[gd_scene load_steps=24 format=3 uid="uid://cj1wtfesnm2ho"]
 
-[ext_resource type="Texture2D" uid="uid://b2b5xoowuprpg" path="res://assets/animated/assets.png" id="1_b2i5a"]
+[ext_resource type="Script" uid="uid://dv373vhe8lfep" path="res://scenes/objects/question_block.gd" id="1_73sub"]
+[ext_resource type="Texture2D" uid="uid://b2b5xoowuprpg" path="res://assets/animated/assets.png" id="2_rlb2q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2i5a"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(0, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_63yit"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(94, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kx3kj"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(188, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvvce"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(282, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uylb"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(376, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tihvf"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(470, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_owgfs"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(564, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yhio"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(658, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lqfk1"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(752, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wre1"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(846, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gnaie"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(940, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74ijd"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1034, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6e50d"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1128, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mpg0g"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1222, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cjic"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1316, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tybhn"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1410, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mjwt4"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1504, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrwh"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1598, 0, 92, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uxvnr"]
-atlas = ExtResource("1_b2i5a")
+atlas = ExtResource("2_rlb2q")
 region = Rect2(1692, 0, 92, 92)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_djjhe"]
@@ -146,7 +147,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21u4j"]
 size = Vector2(88, 88)
 
-[node name="Area2D" type="Area2D"]
+[node name="question_block" type="StaticBody2D"]
+script = ExtResource("1_73sub")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_djjhe")
@@ -155,3 +157,14 @@ frame_progress = 0.263114
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_21u4j")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_21u4j")
+debug_color = Color(0.803582, 0.286111, 0.764412, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
