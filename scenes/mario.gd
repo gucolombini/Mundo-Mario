@@ -12,6 +12,7 @@ const BASE_GRAVITY_JUMP_HELD = BASE_GRAVITY/2
 const BASE_MAX_FALL_SPEED = 2700
 const BASE_P_METER_CHARGE_TIME  = 60
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 @onready var speed_bar = $ProgressBar
 var animstate = "idle"
 var p_meter = 0
@@ -37,7 +38,7 @@ func _physics_process(delta: float) -> void:
 				speed = BASE_SPEED_RUN
 		if velocity.x*dir < 0: 
 			accel = BASE_DECCELERATION
-			if abs(velocity.x) > BASE_SPEED: skidding = true
+			if abs(velocity.x) > BASE_SPEED/2: skidding = true
 		else: skidding = false
 		velocity.x = move_toward(velocity.x, speed*dir, accel)
 		if is_on_floor(): $AnimatedSprite2D.scale.x = -dir
@@ -64,10 +65,11 @@ func _physics_process(delta: float) -> void:
 	if abs(velocity.x) > BASE_SPEED:
 		jump_speed += BASE_JUMP_SPEED_INC * (abs(velocity.x) - BASE_SPEED)
 	var gravity = BASE_GRAVITY
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_speed
+		$SFXJump.play()
 		animstate = "jump"
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("jump"):
 		gravity = BASE_GRAVITY_JUMP_HELD
 	if velocity.y > 0 and not is_on_floor():
 		animstate = "fall"

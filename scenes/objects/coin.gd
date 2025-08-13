@@ -1,10 +1,16 @@
 extends Area2D
 
 signal coin_collected
+var collected: bool = false
 
 func collect():
-	emit_signal("coin_collected")
-	queue_free()
+	if not collected:
+		collected = true
+		emit_signal("coin_collected")
+		position.y = 9999
+		$SFXCoin.play()
+		await $SFXCoin.finished
+		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	collect()

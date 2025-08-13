@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://cj1wtfesnm2ho"]
+[gd_scene load_steps=26 format=3 uid="uid://cj1wtfesnm2ho"]
 
 [ext_resource type="Script" uid="uid://dv373vhe8lfep" path="res://scenes/objects/question_block.gd" id="1_73sub"]
 [ext_resource type="PackedScene" uid="uid://d3swkc3c5j3cq" path="res://scenes/mario.tscn" id="2_42syb"]
 [ext_resource type="Texture2D" uid="uid://b2b5xoowuprpg" path="res://assets/animated/assets.png" id="2_rlb2q"]
+[ext_resource type="AudioStream" uid="uid://chawvyxvs40hf" path="res://assets/audio/sounds/smw_power-up_appears.wav" id="4_42syb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2i5a"]
 atlas = ExtResource("2_rlb2q")
@@ -170,5 +171,8 @@ debug_color = Color(0.803582, 0.286111, 0.764412, 0.42)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SFXPowerUpAppear" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_42syb")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

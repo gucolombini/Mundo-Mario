@@ -19,11 +19,13 @@ func bounce():
 	bouncing = true
 	y_speed = bounce_velocity
 	total_uses -= 1
-	var spawned_entity = spawn_scene.instantiate()
-	add_sibling(spawned_entity)
-	spawned_entity.position.x = position.x
-	spawned_entity.position.y = position.y-30
-	spawned_entity.velocity.y = -1500
+	if spawn_scene:
+		$SFXPowerUpAppear.play()
+		var spawned_entity = spawn_scene.instantiate()
+		add_sibling(spawned_entity)
+		spawned_entity.position.x = position.x
+		spawned_entity.position.y = position.y-30
+		spawned_entity.velocity.y = -1500
 	
 
 func _ready():
