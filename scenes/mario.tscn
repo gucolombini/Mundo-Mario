@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3swkc3c5j3cq"]
+[gd_scene load_steps=18 format=3 uid="uid://d3swkc3c5j3cq"]
 
 [ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scenes/mario.gd" id="1_q20sn"]
 [ext_resource type="Texture2D" uid="uid://drrm2eirpoq3x" path="res://assets/animated/marioanims/marioanims0001.png" id="1_t0xp7"]
@@ -116,12 +116,20 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
-size = Vector2(76, 164)
+size = Vector2(48, 164)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q20sn"]
 size = Vector2(48, 14)
 
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_bdh24"]
+length = 38.0
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_pruu4"]
+length = 16.0
+
 [node name="Mario" type="CharacterBody2D"]
+floor_stop_on_slope = false
+floor_snap_length = 25.2
 script = ExtResource("1_q20sn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -153,3 +161,18 @@ debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
 
 [node name="SFXJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_bdh24")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -153)
+rotation = 1.5708
+shape = SubResource("SeparationRayShape2D_bdh24")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, -153)
+rotation = 1.5708
+scale = Vector2(-1, -1)
+shape = SubResource("SeparationRayShape2D_bdh24")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("SeparationRayShape2D_pruu4")
