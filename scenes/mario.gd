@@ -3,8 +3,8 @@ extends CharacterBody2D
 const BASE_SPEED = 550.0
 const BASE_SPEED_RUN = 1000.0
 const BASE_SPEED_P = 1200.0
-const BASE_ACCELERATION = 30
-const BASE_DECCELERATION = 40
+const BASE_ACCELERATION = 1800
+const BASE_DECCELERATION = 2400
 const BASE_JUMP_SPEED = -1700.0
 const BASE_JUMP_SPEED_INC = -0.5
 const BASE_GRAVITY = 7000
@@ -23,6 +23,10 @@ func _ready() -> void:
 	speed_bar.max_value = BASE_P_METER_CHARGE_TIME 
 
 func _physics_process(delta: float) -> void:
+	var grounded = is_on_floor()
+	$HeadRayFront.disabled = grounded
+	$HeadRayBack.disabled = grounded
+	
 	var animation_timer = 1
 	
 	speed_bar.value = p_meter
@@ -40,13 +44,13 @@ func _physics_process(delta: float) -> void:
 			accel = BASE_DECCELERATION
 			if abs(velocity.x) > BASE_SPEED/2: skidding = true
 		else: skidding = false
-		velocity.x = move_toward(velocity.x, speed*dir, accel)
-		if is_on_floor(): $AnimatedSprite2D.scale.x = -dir
-	elif is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION)
+		velocity.x = move_toward(velocity.x, speed*dir, accel*delta)
+		if grounded: $AnimatedSprite2D.scale.x = -dir
+	elif grounded:
+		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION*delta)
 	
 	var gravity = BASE_GRAVITY
-	if is_on_floor():
+	if grounded:
 		gravity = delta*2
 		if velocity.x != 0:
 			if skidding:
@@ -57,21 +61,21 @@ func _physics_process(delta: float) -> void:
 		else: 
 			animstate = "idle"
 		if abs(velocity.x) >= BASE_SPEED_RUN:
-			p_meter = move_toward(p_meter, BASE_P_METER_CHARGE_TIME , 1)
+			p_meter = move_toward(p_meter, BASE_P_METER_CHARGE_TIME , 60*delta)
 			if p_meter >= BASE_P_METER_CHARGE_TIME: p_meter = BASE_P_METER_CHARGE_TIME+10
 		else:
-			p_meter = move_toward(p_meter, 0, 1)
+			p_meter = move_toward(p_meter, 0, 60*delta)
 	
 	var jump_speed = BASE_JUMP_SPEED
 	if abs(velocity.x) > BASE_SPEED:
 		jump_speed += BASE_JUMP_SPEED_INC * (abs(velocity.x) - BASE_SPEED)
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and grounded:
 		velocity.y = jump_speed
 		$SFXJump.play()
 		animstate = "jump"
 	if Input.is_action_pressed("jump"):
 		gravity = BASE_GRAVITY_JUMP_HELD
-	if velocity.y > 0 and not is_on_floor():
+	if velocity.y > 0 and not grounded:
 		animstate = "fall"
 		animation_timer = velocity.y*2/BASE_MAX_FALL_SPEED
 	
