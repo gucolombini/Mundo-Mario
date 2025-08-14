@@ -116,7 +116,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
-size = Vector2(38, 164)
+size = Vector2(38, 157)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q20sn"]
 size = Vector2(38, 14)
@@ -143,7 +143,7 @@ autoplay = "idle"
 offset = Vector2(7.295, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -85)
+position = Vector2(0, -88.5)
 shape = SubResource("RectangleShape2D_bdh24")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
