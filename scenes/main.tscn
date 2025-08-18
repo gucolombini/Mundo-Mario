@@ -45,8 +45,8 @@ colors = PackedColorArray(0.315932, 0.708597, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jyhfs"]
 gradient = SubResource("Gradient_sugp2")
-fill_from = Vector2(1, 0.550459)
-fill_to = Vector2(1, 0.43578)
+fill_from = Vector2(0.986239, 0.724771)
+fill_to = Vector2(0.990826, 0.307339)
 
 [node name="Node2D" type="Node2D"]
 
@@ -77,11 +77,31 @@ drag_bottom_margin = 0.75
 script = ExtResource("4_tbgi4")
 target = NodePath("../Mario")
 
-[node name="TextureRect" type="TextureRect" parent="Camera2D"]
-z_index = -100
-offset_left = -7280.0
-offset_top = -4012.0
-offset_right = 6840.0
-offset_bottom = 4382.0
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+layer = -128
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/CanvasLayer"]
+z_index = -128
+offset_left = -1730.0
+offset_top = -732.0
+offset_right = 2546.0
+offset_bottom = 1810.0
 scale = Vector2(1.12, 1)
 texture = SubResource("GradientTexture2D_jyhfs")
+
+[connection signal="area_entered" from="TileMapLayer/coin" to="TileMapLayer/coin" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/coin" to="TileMapLayer/coin" method="_on_body_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@22630" to="TileMapLayer/@Area2D@22630" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@22630" to="TileMapLayer/@Area2D@22630" method="_on_body_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@22631" to="TileMapLayer/@Area2D@22631" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@22631" to="TileMapLayer/@Area2D@22631" method="_on_body_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@22632" to="TileMapLayer/@Area2D@22632" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@22632" to="TileMapLayer/@Area2D@22632" method="_on_body_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@22633" to="TileMapLayer/@Area2D@22633" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@22633" to="TileMapLayer/@Area2D@22633" method="_on_body_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@22634" to="TileMapLayer/@Area2D@22634" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@22634" to="TileMapLayer/@Area2D@22634" method="_on_body_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@22635" to="TileMapLayer/@Area2D@22635" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@22635" to="TileMapLayer/@Area2D@22635" method="_on_body_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@22636" to="TileMapLayer/@Area2D@22636" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@22636" to="TileMapLayer/@Area2D@22636" method="_on_body_entered"]

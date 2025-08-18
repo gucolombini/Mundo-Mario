@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="mario_world"
+config/name="mundo_mario"
 run/main_scene="uid://ce7ofj72fggcw"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
