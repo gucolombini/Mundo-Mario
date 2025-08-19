@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3swkc3c5j3cq"]
+[gd_scene load_steps=18 format=3 uid="uid://d3swkc3c5j3cq"]
 
 [ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scenes/mario.gd" id="1_q20sn"]
 [ext_resource type="Texture2D" uid="uid://drrm2eirpoq3x" path="res://assets/animated/marioanims/marioanims0001.png" id="1_t0xp7"]
@@ -115,9 +115,6 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
-size = Vector2(38, 157)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q20sn"]
 size = Vector2(38, 14)
 
@@ -125,10 +122,10 @@ size = Vector2(38, 14)
 length = 38.0
 
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_pruu4"]
-length = 16.0
+length = 35.58
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pruu4"]
-size = Vector2(62, 130)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
+size = Vector2(8, 8)
 
 [node name="Mario" type="CharacterBody2D"]
 floor_stop_on_slope = false
@@ -142,10 +139,6 @@ animation = &"idle"
 autoplay = "idle"
 offset = Vector2(7.295, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -88.5)
-shape = SubResource("RectangleShape2D_bdh24")
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -193.0
 offset_top = -262.0
@@ -153,10 +146,10 @@ offset_right = 195.0
 offset_bottom = -235.0
 show_percentage = false
 
-[node name="Area2D Head" type="Area2D" parent="."]
+[node name="Aera2DHead" type="Area2D" parent="."]
 collision_mask = 0
 
-[node name="HeadHitarea" type="CollisionShape2D" parent="Area2D Head"]
+[node name="HeadHitarea" type="CollisionShape2D" parent="Aera2DHead"]
 position = Vector2(0, -167)
 shape = SubResource("RectangleShape2D_q20sn")
 debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
@@ -176,9 +169,16 @@ scale = Vector2(-1, -1)
 shape = SubResource("SeparationRayShape2D_bdh24")
 
 [node name="FootRay" type="CollisionShape2D" parent="."]
-position = Vector2(0, -18)
+position = Vector2(-16, -36)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
-[node name="BodyHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -68)
-shape = SubResource("RectangleShape2D_pruu4")
+[node name="FootRay2" type="CollisionShape2D" parent="."]
+position = Vector2(17, -36)
+shape = SubResource("SeparationRayShape2D_pruu4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_bdh24")
+one_way_collision = true
+
+[node name="Area2DFoot" type="Area2D" parent="."]
