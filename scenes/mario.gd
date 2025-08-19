@@ -9,7 +9,7 @@ const BASE_JUMP_SPEED = -1700.0
 const BASE_JUMP_SPEED_INC = -0.5
 const BASE_GRAVITY = 7000
 const BASE_GRAVITY_JUMP_HELD = BASE_GRAVITY/2
-const BASE_MAX_FALL_SPEED = 2700
+const BASE_MAX_FALL_SPEED = 2000
 const BASE_P_METER_CHARGE_TIME  = 30
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	
 	var gravity = BASE_GRAVITY
 	if grounded:
-		gravity = delta*2
+		gravity = 0
 		if velocity.x != 0:
 			if skidding:
 				animstate = "skid"
