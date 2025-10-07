@@ -41,6 +41,16 @@ jump={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="SOLID"
+2d_physics/layer_2="SEMISOLID"
+2d_physics/layer_3="PLAYER"
+2d_physics/layer_4="ENEMY"
+2d_physics/layer_5="BLOCK HITTING"
+2d_physics/layer_6="HURT ENEMY"
+2d_physics/layer_7="COIN"
+
 [rendering]
 
 renderer/rendering_method="mobile"

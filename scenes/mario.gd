@@ -30,8 +30,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var grounded = is_on_floor()
-	$HeadRayFront.disabled = grounded
-	$HeadRayBack.disabled = grounded
+	# $RayCast2D.disabled = grounded
+	# $RayCast2D2.disabled = grounded
+	# $FootRay.disabled = grounded
+	# $FootRay2.disabled = grounded
 	
 	var animation_timer = 1
 	
@@ -56,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION*delta)
 	
 	var gravity = BASE_GRAVITY
-	if grounded:
+	if grounded and velocity.y == 0:
 		gravity = 0
 		if velocity.x != 0:
 			if skidding:

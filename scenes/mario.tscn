@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3swkc3c5j3cq"]
+[gd_scene load_steps=18 format=3 uid="uid://d3swkc3c5j3cq"]
 
 [ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scenes/mario.gd" id="1_q20sn"]
 [ext_resource type="Texture2D" uid="uid://drrm2eirpoq3x" path="res://assets/animated/marioanims/marioanims0001.png" id="1_t0xp7"]
@@ -52,10 +52,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_7hmub")
+"texture": ExtResource("8_lt8tb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_lt8tb")
+"texture": ExtResource("9_7hmub")
 }],
 "loop": true,
 "name": &"fall",
@@ -121,14 +121,8 @@ size = Vector2(38, 157)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q20sn"]
 size = Vector2(38, 14)
 
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_bdh24"]
-length = 38.0
-
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_pruu4"]
 length = 16.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pruu4"]
-size = Vector2(62, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_440ab"]
 size = Vector2(68, 20)
@@ -136,6 +130,7 @@ size = Vector2(68, 20)
 [node name="Mario" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
+slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_snap_length = 50.0
 script = ExtResource("1_q20sn")
@@ -143,7 +138,7 @@ script = ExtResource("1_q20sn")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -102)
 sprite_frames = SubResource("SpriteFrames_l5geh")
-animation = &"idle"
+animation = &"fall"
 autoplay = "idle"
 offset = Vector2(7.295, 0)
 
@@ -159,7 +154,7 @@ offset_bottom = -235.0
 show_percentage = false
 
 [node name="Area2DHead" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 16
 collision_mask = 0
 
 [node name="HeadHitarea" type="CollisionShape2D" parent="Area2DHead"]
@@ -170,28 +165,17 @@ debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
 [node name="SFXJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_bdh24")
 
-[node name="HeadRayFront" type="CollisionShape2D" parent="."]
-position = Vector2(0, -153)
-rotation = 1.5708
-shape = SubResource("SeparationRayShape2D_bdh24")
-
-[node name="HeadRayBack" type="CollisionShape2D" parent="."]
-position = Vector2(0, -153)
-rotation = 1.5708
-scale = Vector2(-1, -1)
-shape = SubResource("SeparationRayShape2D_bdh24")
-
 [node name="FootRay" type="CollisionShape2D" parent="."]
-position = Vector2(0, -18)
+position = Vector2(-34, -18)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
-[node name="BodyHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -68)
-shape = SubResource("RectangleShape2D_pruu4")
+[node name="FootRay2" type="CollisionShape2D" parent="."]
+position = Vector2(34, -18)
+shape = SubResource("SeparationRayShape2D_pruu4")
 
 [node name="Area2DFoot" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 16
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DFoot"]
 position = Vector2(0, -10)
