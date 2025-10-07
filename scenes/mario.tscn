@@ -115,9 +115,6 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
-size = Vector2(38, 157)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q20sn"]
 size = Vector2(38, 14)
 
@@ -126,6 +123,9 @@ length = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_440ab"]
 size = Vector2(68, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
+size = Vector2(50, 164)
 
 [node name="Mario" type="CharacterBody2D"]
 collision_layer = 2
@@ -141,10 +141,6 @@ sprite_frames = SubResource("SpriteFrames_l5geh")
 animation = &"fall"
 autoplay = "idle"
 offset = Vector2(7.295, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -88.5)
-shape = SubResource("RectangleShape2D_bdh24")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -193.0
@@ -166,11 +162,13 @@ debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
 stream = ExtResource("2_bdh24")
 
 [node name="FootRay" type="CollisionShape2D" parent="."]
-position = Vector2(-34, -18)
+position = Vector2(-34, -18.999998)
+scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
 [node name="FootRay2" type="CollisionShape2D" parent="."]
-position = Vector2(34, -18)
+position = Vector2(34, -18.999998)
+scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
 [node name="Area2DFoot" type="Area2D" parent="."]
@@ -181,5 +179,9 @@ collision_mask = 0
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_440ab")
 debug_color = Color(0.992747, 0, 0.247666, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -85)
+shape = SubResource("RectangleShape2D_bdh24")
 
 [connection signal="area_entered" from="Area2DFoot" to="." method="_on_area_2d_foot_area_entered"]
