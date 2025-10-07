@@ -5,9 +5,10 @@ const BASE_SPEED_RUN = 1000.0
 const BASE_SPEED_P = 1200.0
 const BASE_ACCELERATION = 1800
 const BASE_DECCELERATION = 2400
-const BASE_JUMP_SPEED = -1700.0
+const BASE_JUMP_SPEED = -1950.0
 const BASE_JUMP_SPEED_INC = -0.5
-const BASE_GRAVITY = 7000
+const BASE_STOMP_BOUNCE_SPEED = -1400
+const BASE_GRAVITY = 8000
 const BASE_GRAVITY_JUMP_HELD = BASE_GRAVITY/2
 const BASE_MAX_FALL_SPEED = 2000
 const BASE_P_METER_CHARGE_TIME  = 30
@@ -17,6 +18,11 @@ const BASE_P_METER_CHARGE_TIME  = 30
 var animstate = "idle"
 var p_meter = 0
 var skidding = false
+
+func jump(jump_speed):
+	velocity.y = jump_speed
+	$SFXJump.play()
+	animstate = "jump"
 
 func _ready() -> void:
 	speed_bar.value = 0
@@ -70,9 +76,7 @@ func _physics_process(delta: float) -> void:
 	if abs(velocity.x) > BASE_SPEED:
 		jump_speed += BASE_JUMP_SPEED_INC * (abs(velocity.x) - BASE_SPEED)
 	if Input.is_action_just_pressed("jump") and grounded:
-		velocity.y = jump_speed
-		$SFXJump.play()
-		animstate = "jump"
+		jump(jump_speed)
 	if Input.is_action_pressed("jump"):
 		gravity = BASE_GRAVITY_JUMP_HELD
 	if velocity.y > 0 and not grounded:
@@ -85,3 +89,12 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite2D.play(animstate)
 	$AnimatedSprite2D.speed_scale = animation_timer
 	move_and_slide()
+
+func _on_area_2d_foot_area_entered(area: Area2D) -> void:
+	if not velocity.y < 0:
+		print("STOMP!")
+		if Input.is_action_pressed("jump"):
+			jump(BASE_JUMP_SPEED + BASE_JUMP_SPEED_INC * (BASE_SPEED_P - BASE_SPEED))
+		else:
+			jump(BASE_STOMP_BOUNCE_SPEED)
+	pass # Replace with function body.

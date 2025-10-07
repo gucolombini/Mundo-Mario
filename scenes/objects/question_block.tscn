@@ -150,6 +150,7 @@ animations = [{
 size = Vector2(88, 88)
 
 [node name="question_block" type="StaticBody2D"]
+collision_mask = 0
 script = ExtResource("1_73sub")
 spawn_scene = ExtResource("2_42syb")
 total_uses = 10
@@ -164,6 +165,7 @@ shape = SubResource("RectangleShape2D_21u4j")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_21u4j")
