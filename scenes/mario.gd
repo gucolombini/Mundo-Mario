@@ -23,6 +23,10 @@ func jump(jump_speed):
 	velocity.y = jump_speed
 	$SFXJump.play()
 	animstate = "jump"
+	
+func toggle_ray_foot(value:bool = true) -> void:
+	$FootRay.disabled = !value
+	$FootRay2.disabled = !value
 
 func _ready() -> void:
 	speed_bar.value = 0
@@ -30,10 +34,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var grounded = is_on_floor()
-	# $RayCast2D.disabled = grounded
-	# $RayCast2D2.disabled = grounded
-	# $FootRay.disabled = grounded
-	# $FootRay2.disabled = grounded
 	
 	var animation_timer = 1
 	

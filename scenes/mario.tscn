@@ -124,8 +124,8 @@ length = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_440ab"]
 size = Vector2(68, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdh24"]
-size = Vector2(50, 164)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bdh24"]
+points = PackedVector2Array(30, -10, -30, -10, -30, -130, 0, -171.435, 30, -130)
 
 [node name="Mario" type="CharacterBody2D"]
 collision_layer = 2
@@ -162,12 +162,12 @@ debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
 stream = ExtResource("2_bdh24")
 
 [node name="FootRay" type="CollisionShape2D" parent="."]
-position = Vector2(-34, -18.999998)
+position = Vector2(-30, -19.999998)
 scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
 [node name="FootRay2" type="CollisionShape2D" parent="."]
-position = Vector2(34, -18.999998)
+position = Vector2(30, -19.999998)
 scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
@@ -181,7 +181,6 @@ shape = SubResource("RectangleShape2D_440ab")
 debug_color = Color(0.992747, 0, 0.247666, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -85)
-shape = SubResource("RectangleShape2D_bdh24")
+shape = SubResource("ConvexPolygonShape2D_bdh24")
 
 [connection signal="area_entered" from="Area2DFoot" to="." method="_on_area_2d_foot_area_entered"]
