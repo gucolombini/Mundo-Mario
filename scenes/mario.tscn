@@ -119,7 +119,7 @@ animations = [{
 size = Vector2(2, 14)
 
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_pruu4"]
-length = 16.0
+length = 12.987024
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_440ab"]
 size = Vector2(68, 20)
@@ -162,12 +162,12 @@ debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
 stream = ExtResource("2_bdh24")
 
 [node name="FootRay" type="CollisionShape2D" parent="."]
-position = Vector2(-30, -19.999998)
+position = Vector2(-30, -17)
 scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
 [node name="FootRay2" type="CollisionShape2D" parent="."]
-position = Vector2(30, -19.999998)
+position = Vector2(30, -17)
 scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
