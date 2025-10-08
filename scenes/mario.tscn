@@ -116,7 +116,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q20sn"]
-size = Vector2(38, 14)
+size = Vector2(2, 14)
 
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_pruu4"]
 length = 16.0
@@ -128,7 +128,7 @@ size = Vector2(68, 20)
 points = PackedVector2Array(30, -10, -30, -10, -30, -130, 0, -171.435, 30, -130)
 
 [node name="Mario" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 3
 slide_on_ceiling = false
 floor_stop_on_slope = false
@@ -172,8 +172,8 @@ scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
 [node name="Area2DFoot" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 0
+collision_layer = 0
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DFoot"]
 position = Vector2(0, -10)

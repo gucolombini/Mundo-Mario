@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://cj1wtfesnm2ho"]
+[gd_scene load_steps=25 format=3 uid="uid://cj1wtfesnm2ho"]
 
 [ext_resource type="Script" uid="uid://dv373vhe8lfep" path="res://scenes/objects/question_block.gd" id="1_73sub"]
-[ext_resource type="PackedScene" uid="uid://d3swkc3c5j3cq" path="res://scenes/mario.tscn" id="2_42syb"]
 [ext_resource type="Texture2D" uid="uid://b2b5xoowuprpg" path="res://assets/animated/assets.png" id="2_rlb2q"]
 [ext_resource type="AudioStream" uid="uid://chawvyxvs40hf" path="res://assets/audio/sounds/smw_power-up_appears.wav" id="4_42syb"]
 
@@ -152,8 +151,7 @@ size = Vector2(88, 88)
 [node name="question_block" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource("1_73sub")
-spawn_scene = ExtResource("2_42syb")
-total_uses = 10
+total_uses = 999
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_djjhe")
