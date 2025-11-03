@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 			if abs(velocity.x) > BASE_SPEED/2: skidding = true
 		else: skidding = false
 		velocity.x = move_toward(velocity.x, speed*dir, accel*delta)
-		if grounded: $AnimatedSprite2D.scale.x = -dir
+		if grounded: $AnimatedSprite2D.scale.x = abs($AnimatedSprite2D.scale.x)*(-dir)
 	elif grounded:
 		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION*delta)
 	
