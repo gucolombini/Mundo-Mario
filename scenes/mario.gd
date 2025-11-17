@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 		else: 
 			animstate = "idle"
 		if abs(velocity.x) >= BASE_SPEED_RUN:
+			animstate = "run"
 			p_meter = move_toward(p_meter, BASE_P_METER_CHARGE_TIME , 60*delta)
 			if p_meter >= BASE_P_METER_CHARGE_TIME: p_meter = BASE_P_METER_CHARGE_TIME+10
 		else:
@@ -87,8 +88,16 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.y = min(velocity.y + gravity * delta, BASE_MAX_FALL_SPEED)
 	
-	if $AnimatedSprite2D.animation != animstate:
+	var prevanimstate = $AnimatedSprite2D.animation
+	if prevanimstate != animstate:
+		var startframe = 0
+		var frameprog = 0
+		if prevanimstate == "run" and animstate == "walk" or prevanimstate == "walk" and animstate == "run":
+			startframe = $AnimatedSprite2D.frame
+			frameprog = $AnimatedSprite2D.frame_progress
+			print(startframe)
 		$AnimatedSprite2D.play(animstate)
+		$AnimatedSprite2D.set_frame_and_progress(startframe, frameprog)
 	$AnimatedSprite2D.speed_scale = animation_timer
 	move_and_slide()
 
