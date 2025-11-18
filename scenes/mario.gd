@@ -13,8 +13,9 @@ const BASE_GRAVITY_JUMP_HELD = BASE_GRAVITY/2
 const BASE_MAX_FALL_SPEED = 2000
 const BASE_P_METER_CHARGE_TIME  = 30
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+@onready var sprite = $Visuals/AnimatedSprite2D
 @onready var speed_bar = $ProgressBar
+
 var animstate = "idle"
 var p_meter = 0
 var skidding = false
@@ -53,7 +54,8 @@ func _physics_process(delta: float) -> void:
 			if abs(velocity.x) > BASE_SPEED/2: skidding = true
 		else: skidding = false
 		velocity.x = move_toward(velocity.x, speed*dir, accel*delta)
-		if grounded: $AnimatedSprite2D.scale.x = abs($AnimatedSprite2D.scale.x)*(-dir)
+		print("scale: ", scale.x, "dir: ", dir)
+		if grounded: $Visuals.scale.x = abs($Visuals.scale.x)*-dir
 	elif grounded:
 		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION*delta)
 	
@@ -88,17 +90,17 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.y = min(velocity.y + gravity * delta, BASE_MAX_FALL_SPEED)
 	
-	var prevanimstate = $AnimatedSprite2D.animation
+	var prevanimstate = sprite.animation
 	if prevanimstate != animstate:
 		var startframe = 0
 		var frameprog = 0
 		if prevanimstate == "run" and animstate == "walk" or prevanimstate == "walk" and animstate == "run":
-			startframe = $AnimatedSprite2D.frame
-			frameprog = $AnimatedSprite2D.frame_progress
+			startframe = sprite.frame
+			frameprog = sprite.frame_progress
 			print(startframe)
-		$AnimatedSprite2D.play(animstate)
-		$AnimatedSprite2D.set_frame_and_progress(startframe, frameprog)
-	$AnimatedSprite2D.speed_scale = animation_timer
+		sprite.play(animstate)
+		sprite.set_frame_and_progress(startframe, frameprog)
+	sprite.speed_scale = animation_timer
 	move_and_slide()
 
 func _on_area_2d_foot_area_entered(area: Area2D) -> void:

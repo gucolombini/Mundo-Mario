@@ -242,7 +242,9 @@ floor_stop_on_slope = false
 floor_snap_length = 50.0
 script = ExtResource("1_q20sn")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(-9.595566, -108.00001)
 scale = Vector2(0.39624003, 0.3962401)
 sprite_frames = SubResource("SpriteFrames_l5geh")
