@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3swkc3c5j3cq"]
+[gd_scene load_steps=27 format=3 uid="uid://d3swkc3c5j3cq"]
 
 [ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scenes/mario.gd" id="1_q20sn"]
 [ext_resource type="AudioStream" uid="uid://dn26p6om4jdv2" path="res://assets/audio/sounds/smw_jump.wav" id="2_bdh24"]
@@ -67,6 +67,14 @@ region = Rect2(2250, 550, 375, 550)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nirg1"]
 atlas = ExtResource("2_wnd63")
 region = Rect2(2625, 550, 375, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gbmu"]
+atlas = ExtResource("2_wnd63")
+region = Rect2(0, 1100, 375, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnd63"]
+atlas = ExtResource("2_wnd63")
+region = Rect2(375, 1100, 375, 550)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l5geh"]
 animations = [{
@@ -181,11 +189,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8ska5")
+"texture": SubResource("AtlasTexture_5gbmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnd63")
 }],
 "loop": true,
 "name": &"skid",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -235,9 +246,9 @@ script = ExtResource("1_q20sn")
 position = Vector2(-7.5955653, -108.00001)
 scale = Vector2(0.39624003, 0.3962401)
 sprite_frames = SubResource("SpriteFrames_l5geh")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.9654399
+frame_progress = 0.66044044
 offset = Vector2(7.295, 0)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -281,5 +292,10 @@ debug_color = Color(0.992747, 0, 0.247666, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("ConvexPolygonShape2D_bdh24")
+
+[node name="FloorDetectionRay" type="RayCast2D" parent="."]
+position = Vector2(-58.999996, -23.000002)
+scale = Vector2(1.765, 0.48)
+target_position = Vector2(0, 48.780487)
 
 [connection signal="area_entered" from="Area2DFoot" to="." method="_on_area_2d_foot_area_entered"]
