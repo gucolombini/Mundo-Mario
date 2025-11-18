@@ -8,3 +8,9 @@ func _process(delta: float) -> void:
 	if target:
 		position.x = target.position.x
 		position.y = target.position.y
+		
+	if Input.is_action_pressed("ui_up"):
+		zoom += Vector2(delta, delta);
+		
+	if Input.is_action_pressed("ui_down"):
+		zoom -= Vector2(delta, delta);

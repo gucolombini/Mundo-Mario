@@ -232,7 +232,7 @@ length = 12.987024
 size = Vector2(68, 20)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bdh24"]
-points = PackedVector2Array(30, -10, -30, -10, -30, -130, 0, -171.435, 30, -130)
+points = PackedVector2Array(35, -10, -35, -10, -35, -130, 0, -171.435, 35, -130)
 
 [node name="Mario" type="CharacterBody2D"]
 collision_layer = 4
@@ -243,12 +243,12 @@ floor_snap_length = 50.0
 script = ExtResource("1_q20sn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-7.5955653, -108.00001)
+position = Vector2(-9.595566, -108.00001)
 scale = Vector2(0.39624003, 0.3962401)
 sprite_frames = SubResource("SpriteFrames_l5geh")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.66044044
+frame_progress = 0.016587615
 offset = Vector2(7.295, 0)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
