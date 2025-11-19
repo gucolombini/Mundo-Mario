@@ -1,12 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://uwpcx5o0atm3"]
+[gd_scene load_steps=7 format=3 uid="uid://uwpcx5o0atm3"]
 
-[ext_resource type="Texture2D" uid="uid://c3hypmkdl3y0e" path="res://assets/animated/particles/dust1.png" id="1_381wl"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n7s5k"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = false
+[ext_resource type="Material" uid="uid://tiilivmcdkbe" path="res://scenes/materials/dust.tres" id="1_6ls48"]
+[ext_resource type="Texture2D" uid="uid://g24q5ocj7myy" path="res://assets/animated/particles/dust.png" id="2_0mvmy"]
+[ext_resource type="Script" uid="uid://dlt8sak3x4utt" path="res://scenes/oneshot_particle.gd" id="2_6ct2o"]
 
 [sub_resource type="Curve" id="Curve_c43mm"]
 _data = [Vector2(0, 1), 0.0, 0.60674185, 0, 0, Vector2(0.18939394, 0.9887641), -1.9990231, -1.9990231, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -32,17 +28,18 @@ orbit_velocity_max = 0.1000001
 radial_velocity_min = -70.59002
 radial_velocity_max = 69.99998
 gravity = Vector3(0, 98, 0)
-scale_min = 0.59999996
-scale_max = 0.79999995
+scale_min = 0.19999999
+scale_max = 0.29999998
 alpha_curve = SubResource("CurveTexture_n7s5k")
 anim_speed_min = 0.94
 anim_speed_max = 2.44
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
-material = SubResource("CanvasItemMaterial_n7s5k")
+material = ExtResource("1_6ls48")
 scale = Vector2(2.5652175, 0.6666667)
 amount = 5
-texture = ExtResource("1_381wl")
+texture = ExtResource("2_0mvmy")
 explosiveness = 1.0
 draw_order = 2
 process_material = SubResource("ParticleProcessMaterial_6ct2o")
+script = ExtResource("2_6ct2o")
