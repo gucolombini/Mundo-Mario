@@ -22,19 +22,26 @@ const BASE_DUST_AMOUNT_JUMP = 5
 @onready var speed_bar = $ProgressBar
 @onready var dust_emitter = $DustEmitter
 @onready var skid_dust_emitter = $DustEmitter
-@onready var jump_dust_emitter = $JumpDustEmitter
 
 var animstate = "idle"
 var p_meter = 0
 var skidding = false
 
+@export var jump_dust_emitter : PackedScene
+
 func jump(jump_speed):
 	velocity.y = jump_speed
 	$SFXJump.play()
 	animstate = "jump"
-	jump_dust_emitter.restart()
-	jump_dust_emitter.emitting = true
-	jump_dust_emitter.amount = BASE_DUST_AMOUNT_JUMP
+	if jump_dust_emitter: 
+		var jump_dust = jump_dust_emitter.instantiate()
+		jump_dust.position.x = position.x
+		jump_dust.position.y = position.y
+		get_parent().add_child(jump_dust)
+	
+func is_skidding():
+	if abs(velocity.x) > BASE_SPEED/2 and is_on_floor(): return true
+	else: return false
 	
 func toggle_ray_foot(value:bool = true) -> void:
 	$FootRay.disabled = !value
@@ -50,7 +57,6 @@ func _physics_process(delta: float) -> void:
 	
 	dust_emitter.emitting = false
 	skid_dust_emitter.emitting = false
-	jump_dust_emitter.emitting = false
 	
 	speed_bar.value = p_meter
 		
@@ -65,10 +71,9 @@ func _physics_process(delta: float) -> void:
 				speed = BASE_SPEED_RUN
 		if velocity.x*dir < 0: 
 			accel = BASE_DECCELERATION
-			if abs(velocity.x) > BASE_SPEED/2: skidding = true
+			if is_skidding(): skidding = true
 		else: skidding = false
 		velocity.x = move_toward(velocity.x, speed*dir, accel*delta)
-		print("scale: ", scale.x, "dir: ", dir)
 		if grounded: $Visuals.scale.x = abs($Visuals.scale.x)*-dir
 	elif grounded:
 		velocity.x = move_toward(velocity.x, 0, BASE_DECCELERATION*delta)
@@ -115,7 +120,6 @@ func _physics_process(delta: float) -> void:
 		if prevanimstate == "run" and animstate == "walk" or prevanimstate == "walk" and animstate == "run":
 			startframe = sprite.frame
 			frameprog = sprite.frame_progress
-			print(startframe)
 		sprite.play(animstate)
 		sprite.set_frame_and_progress(startframe, frameprog)
 	sprite.speed_scale = animation_timer
