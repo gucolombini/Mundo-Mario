@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://tiilivmcdkbe" path="res://scenes/materials/dust.tres" id="1_6ls48"]
 [ext_resource type="Texture2D" uid="uid://g24q5ocj7myy" path="res://assets/animated/particles/dust.png" id="2_0mvmy"]
-[ext_resource type="Script" uid="uid://dlt8sak3x4utt" path="res://scenes/oneshot_particle.gd" id="2_6ct2o"]
+[ext_resource type="Script" uid="uid://dlt8sak3x4utt" path="res://scripts/oneshot_particle.gd" id="2_6ct2o"]
 
 [sub_resource type="Curve" id="Curve_c43mm"]
 _data = [Vector2(0, 1), 0.0, 0.60674185, 0, 0, Vector2(0.18939394, 0.9887641), -1.9990231, -1.9990231, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

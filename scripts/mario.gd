@@ -23,6 +23,7 @@ const BASE_DUST_AMOUNT_JUMP = 5
 @onready var dust_emitter = $DustEmitter
 @onready var skid_dust_emitter = $DustEmitter
 
+enum States {IDLE, WALKING, RUNNING, SKIDDING, JUMPING, FALLING, STOMPING}
 var animstate = "idle"
 var p_meter = 0
 var skidding = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://d3swkc3c5j3cq"]
 
-[ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scenes/mario.gd" id="1_q20sn"]
+[ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scripts/mario.gd" id="1_q20sn"]
 [ext_resource type="AudioStream" uid="uid://dn26p6om4jdv2" path="res://assets/audio/sounds/smw_jump.wav" id="2_bdh24"]
 [ext_resource type="Texture2D" uid="uid://gfigu13mm366" path="res://assets/animated/marioanims/mario.png" id="2_wnd63"]
 [ext_resource type="PackedScene" uid="uid://dldoiwtvyhcuq" path="res://scenes/dust.tscn" id="4_wnd63"]
@@ -257,6 +257,10 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.016587615
 offset = Vector2(7.295, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="Visuals"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals"]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
