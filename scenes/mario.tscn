@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://d3swkc3c5j3cq"]
+[gd_scene load_steps=29 format=3 uid="uid://d3swkc3c5j3cq"]
 
 [ext_resource type="Script" uid="uid://cq7qpd6n0whxj" path="res://scenes/mario.gd" id="1_q20sn"]
 [ext_resource type="AudioStream" uid="uid://dn26p6om4jdv2" path="res://assets/audio/sounds/smw_jump.wav" id="2_bdh24"]
 [ext_resource type="Texture2D" uid="uid://gfigu13mm366" path="res://assets/animated/marioanims/mario.png" id="2_wnd63"]
+[ext_resource type="PackedScene" uid="uid://dldoiwtvyhcuq" path="res://scenes/dust.tscn" id="4_wnd63"]
+[ext_resource type="PackedScene" uid="uid://uwpcx5o0atm3" path="res://scenes/jump_dust.tscn" id="5_rgcl4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgcl4"]
 atlas = ExtResource("2_wnd63")
@@ -232,7 +234,7 @@ length = 12.987024
 size = Vector2(68, 20)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bdh24"]
-points = PackedVector2Array(35, -10, -35, -10, -35, -130, 0, -171.435, 35, -130)
+points = PackedVector2Array(33, -10, -33, -10, -33, -130, 0, -171.435, 33, -130)
 
 [node name="Mario" type="CharacterBody2D"]
 collision_layer = 4
@@ -245,6 +247,7 @@ script = ExtResource("1_q20sn")
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+z_index = 1
 position = Vector2(-9.595566, -108.00001)
 scale = Vector2(0.39624003, 0.3962401)
 sprite_frames = SubResource("SpriteFrames_l5geh")
@@ -274,12 +277,12 @@ debug_color = Color(0.880679, 0.000356938, 0.821189, 0.42)
 stream = ExtResource("2_bdh24")
 
 [node name="FootRay" type="CollisionShape2D" parent="."]
-position = Vector2(-30, -17)
+position = Vector2(-32.999996, -16.999998)
 scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
 [node name="FootRay2" type="CollisionShape2D" parent="."]
-position = Vector2(30, -17)
+position = Vector2(32.999996, -16.999998)
 scale = Vector2(3.12, 1.1549991)
 shape = SubResource("SeparationRayShape2D_pruu4")
 
@@ -299,5 +302,12 @@ shape = SubResource("ConvexPolygonShape2D_bdh24")
 position = Vector2(-58.999996, -23.000002)
 scale = Vector2(1.765, 0.48)
 target_position = Vector2(0, 48.780487)
+
+[node name="DustEmitter" parent="." instance=ExtResource("4_wnd63")]
+z_index = 2
+position = Vector2(0, -20)
+
+[node name="JumpDustEmitter" parent="." instance=ExtResource("5_rgcl4")]
+position = Vector2(0, -2)
 
 [connection signal="area_entered" from="Area2DFoot" to="." method="_on_area_2d_foot_area_entered"]

@@ -12,9 +12,17 @@ const BASE_GRAVITY = 8000
 const BASE_GRAVITY_JUMP_HELD = BASE_GRAVITY/2
 const BASE_MAX_FALL_SPEED = 2000
 const BASE_P_METER_CHARGE_TIME  = 30
+const BASE_DUST_AMOUNT_RUN = 5
+const BASE_DUST_AMOUNT_SKID = 20
+const BASE_DUST_AMOUNT_JUMP = 5
+
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 @onready var sprite = $Visuals/AnimatedSprite2D
 @onready var speed_bar = $ProgressBar
+@onready var dust_emitter = $DustEmitter
+@onready var skid_dust_emitter = $DustEmitter
+@onready var jump_dust_emitter = $JumpDustEmitter
 
 var animstate = "idle"
 var p_meter = 0
@@ -24,6 +32,9 @@ func jump(jump_speed):
 	velocity.y = jump_speed
 	$SFXJump.play()
 	animstate = "jump"
+	jump_dust_emitter.restart()
+	jump_dust_emitter.emitting = true
+	jump_dust_emitter.amount = BASE_DUST_AMOUNT_JUMP
 	
 func toggle_ray_foot(value:bool = true) -> void:
 	$FootRay.disabled = !value
@@ -35,8 +46,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var grounded = is_on_floor()
-	
 	var animation_timer = 1
+	
+	dust_emitter.emitting = false
+	skid_dust_emitter.emitting = false
+	jump_dust_emitter.emitting = false
 	
 	speed_bar.value = p_meter
 		
@@ -65,6 +79,8 @@ func _physics_process(delta: float) -> void:
 		if velocity.x != 0:
 			if skidding:
 				animstate = "skid"
+				skid_dust_emitter.emitting = true
+				skid_dust_emitter.amount = BASE_DUST_AMOUNT_SKID
 			else: 
 				animstate = "walk"
 				animation_timer = 0.5 + (abs(velocity.x)/BASE_SPEED)/2
@@ -74,6 +90,8 @@ func _physics_process(delta: float) -> void:
 			animstate = "run"
 			p_meter = move_toward(p_meter, BASE_P_METER_CHARGE_TIME , 60*delta)
 			if p_meter >= BASE_P_METER_CHARGE_TIME: p_meter = BASE_P_METER_CHARGE_TIME+10
+			dust_emitter.emitting = true
+			dust_emitter.amount = BASE_DUST_AMOUNT_RUN
 		else:
 			p_meter = move_toward(p_meter, 0, 60*delta)
 	
