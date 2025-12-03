@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://7senncvsy3yb"]
+
+[ext_resource type="Texture2D" uid="uid://cfekhuf0cn2ju" path="res://assets/animated/particles/shine.png" id="1_ntqhk"]
+[ext_resource type="Script" uid="uid://dlt8sak3x4utt" path="res://scripts/oneshot_particle.gd" id="2_faw24"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kw15r"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_dvh6a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.89393944, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e3ix8"]
+curve = SubResource("Curve_dvh6a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1nkks"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 57.91
+spread = 180.0
+initial_velocity_max = 117.649994
+gravity = Vector3(0, 98, 0)
+scale_min = 0.19999999
+alpha_curve = SubResource("CurveTexture_e3ix8")
+anim_speed_min = 0.59999996
+anim_speed_max = 1.1
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_kw15r")
+amount = 4
+texture = ExtResource("1_ntqhk")
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_1nkks")
+script = ExtResource("2_faw24")

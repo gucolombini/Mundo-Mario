@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b413t8bjwwnj3"]
+[gd_scene load_steps=16 format=3 uid="uid://b413t8bjwwnj3"]
 
 [ext_resource type="Texture2D" uid="uid://sw7l32lf5qfw" path="res://assets/animated/coin.png" id="1_npg62"]
 [ext_resource type="Script" uid="uid://d1pipvtqpl137" path="res://scripts/coin.gd" id="1_xxg5f"]
+[ext_resource type="PackedScene" uid="uid://7senncvsy3yb" path="res://scenes/coin_particles.tscn" id="2_v6le6"]
 [ext_resource type="AudioStream" uid="uid://d1gjnavr7e4s8" path="res://assets/audio/sounds/smw_coin.wav" id="3_5towm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxg5f"]
@@ -82,6 +83,7 @@ size = Vector2(74, 86)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_xxg5f")
+particle_emitter = ExtResource("2_v6le6")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
